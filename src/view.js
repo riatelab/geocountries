@@ -28,6 +28,7 @@ export function view(result){
     const txt = svg
       .append("text")
       .attr("font-size", `${fontsize}px`)
+      //.attr("font-weight", e.score == 1 ? "bold" : "normal")
       .text(e.name);
     sizes.push(getsize(txt));
   });
@@ -64,11 +65,16 @@ export function view(result){
   // draw
   const height = d3.max(newdata.map((d) => d.y)) + h / 2;
 
-  const quantile = d3
-    .scaleQuantile()
-    .domain(newdata.map((d) => d.score))
-    .range(d3.schemeRdYlGn[11]);
-  const colbyid = new Map(newdata.map((d) => [d.name, quantile(d.score)]));
+const getcol = (d) => {
+  let col = "orange";
+  if (d == 0) {
+    col = "red";
+  }
+  if (d == 1) {
+    col = "green";
+  }
+  return col;
+}
 
   svg = d3
     .create("svg")
@@ -86,9 +92,10 @@ export function view(result){
     .attr("y", (d) => d.y - d.h / 2)
     .attr("height", (d) => d.h)
     .attr("width", (d) => d.w + wmargin * 2)
-    .attr("fill", (d) => colbyid.get(d.name))
+    .attr("fill", (d) => getcol(d.score))
     .attr("fill-opacity", 0.3)
-    .attr("stroke", "none")
+    .attr("stroke", "white")
+    .attr("stroke-width", 1.5)
     .lower();
 
   svg
@@ -99,9 +106,9 @@ export function view(result){
     .attr("dominant-baseline", "middle")
     .attr("x", (d) => d.x)
     .attr("y", (d) => d.y)
-    .attr("font-weight", (d) => (d.score < 0.9 ? "bold" : "normal"))
+    //.attr("font-weight", (d) => (d.score == 1 ? "bold" : "normal"))
     .attr("font-size", fontsize)
-    .attr("fill", (d) => colbyid.get(d.name))
+    .attr("fill", (d) => getcol(d.score))
     .text((d) => d.name);
 
   return svg.node();
