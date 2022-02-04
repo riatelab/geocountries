@@ -77,3 +77,23 @@ To add the codes to the initial dataset
 ~~~js
 data = geocountries.add({ data: mydata, codes: codes, name: "Area" })
 ~~~
+
+#### <ins>addiso3</ins>
+
+If you know your dataset well and you don't need to investigate it, you can skip all the previous steps and add directly the iso3 codes.
+
+~~~js
+geocountries.addiso3({
+  data: mydata,
+  name: "Area",
+  treashold: 0.9,
+  patch: [
+    { name: "French Polynesia", iso3: "PYF" },
+    { name: "Niue", iso3: "NIU" },
+    { name: "Cook Islands", iso3: "COK" },
+    { name: "China, Macao SAR", iso3: "MAC" },
+    { name: "Southern Africa", iso3: undefined },
+    { name: "South America", iso3: undefined }
+  ]
+})
+~~~
