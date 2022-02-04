@@ -2,8 +2,6 @@
 
 *A tool to get ISO codes and geometries from country names*
 
-![](./img/geocountries.png)
-
 ## Installation
 
 #### <ins>In browser</ins>
@@ -18,23 +16,64 @@
 geocountries = require("geocountries")
 ~~~
 
+## Documentation
+
+Domumentation and running examples available [here](https://observablehq.com/@neocartocnrs/geocountries).
+
 ## Features
 
-### getcode
+#### <ins>getcode</ins>
 
-Get an ISO3 code from a country name.
+To get an ISO3 code from a country name.
 
 ~~~js
 geocountries.getcode("United States of America")
 ~~~
 
-returns
+returns an object
+
 ~~~js
 {name: "United States of America", iso3: "USA", score: 1}
 ~~~
 
-### Why Bertin ?
+#### <ins>iso3</ins>
 
-### Why Bertin ?
+To get ISO3 codes from a json data set.
 
-### Why Bertin ?
+~~~js
+codes = geocountries.iso3({
+  json: fao,
+  name: "Area",
+  threshold: 0.7
+})
+~~~
+
+returns a Map
+
+~~~js
+{
+  "Afghanistan" => Object {name: "Afghanistan", iso3: "AFG", score: 1}
+  "Albania" => Object {name: "Albania", iso3: "ALB", score: 1}
+  "Algeria" => Object {name: "Algeria", iso3: "DZA", score: 1}
+}
+~~~
+
+#### <ins>view</ins>
+
+To visualize the matching of codes and names.
+
+~~~js
+geocountries.view(codes)
+~~~
+
+returns a svg chart
+
+![](./img/geocountries.png)
+
+#### <ins>add</ins>
+
+To add the codes to the initial dataset
+
+~~~js
+data = geocountries.add({ data: mydata, codes: codes, name: "Area" })
+~~~
