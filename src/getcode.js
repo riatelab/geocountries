@@ -1,7 +1,7 @@
 import {similarity} from "./levenshtein.js"
 import {codes} from "./codes.js"
 
-export function getcode(str, threshold = 0.75){
+export function getcode(str, threshold = 0.9){
   let result = [];
   codes.forEach((e) => {
     for (let i = 1; i < Object.keys(e).length; i++) {

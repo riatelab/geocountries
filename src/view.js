@@ -29,7 +29,8 @@ export function view(result){
       .append("text")
       .attr("font-size", `${fontsize}px`)
       //.attr("font-weight", e.score == 1 ? "bold" : "normal")
-      .text(e.name);
+      //.text(`[${e.iso3}] ${e.name}`);
+      .text(`${e.iso3 ? "[" + e.iso3 + "] ": ""}${e.name}`);
     sizes.push(getsize(txt));
   });
   svg.remove();
@@ -52,6 +53,7 @@ export function view(result){
 
     newdata.push({
       name: data[i].name,
+      iso3: data[i].iso3,
       score: data[i].score,
       x: x,
       y: y,
@@ -66,12 +68,12 @@ export function view(result){
   const height = d3.max(newdata.map((d) => d.y)) + h / 2;
 
 const getcol = (d) => {
-  let col = "orange";
+  let col = "#c26932";
   if (d == 0) {
-    col = "red";
+    col = "#696969";
   }
   if (d == 1) {
-    col = "green";
+    col = "#17802e";
   }
   return col;
 }
@@ -93,7 +95,7 @@ const getcol = (d) => {
     .attr("height", (d) => d.h)
     .attr("width", (d) => d.w + wmargin * 2)
     .attr("fill", (d) => getcol(d.score))
-    .attr("fill-opacity", 0.3)
+    .attr("fill-opacity", d => d.score == 0 ? 0 : 0.3)
     .attr("stroke", "white")
     .attr("stroke-width", 1.5)
     .lower();
@@ -106,10 +108,10 @@ const getcol = (d) => {
     .attr("dominant-baseline", "middle")
     .attr("x", (d) => d.x)
     .attr("y", (d) => d.y)
-    //.attr("font-weight", (d) => (d.score == 1 ? "bold" : "normal"))
+    //.attr("text-decoration", (d) => (d.score == 0 ? "line-through" : "none"))
     .attr("font-size", fontsize)
     .attr("fill", (d) => getcol(d.score))
-    .text((d) => d.name);
+    .text(d => `${d.iso3 ? "[" + d.iso3 + "] ": ""}${d.name}`);
 
   return svg.node();
 }
