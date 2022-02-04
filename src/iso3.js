@@ -1,4 +1,4 @@
-import {getcoden} from "./getcode.js"
+import {getcode} from "./getcode.js"
 
 iso3 = function (data, name, threshold = 0.75) {
   const result = [];
