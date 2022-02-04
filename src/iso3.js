@@ -1,6 +1,6 @@
 import {getcode} from "./getcode.js"
 
-iso3 = function (data, name, threshold = 0.75) {
+export function iso3(data, name, threshold = 0.75) {
   const result = [];
   const names = Array.from(new Set(data.map((d) => d[name])));
   names.forEach((e) => {
