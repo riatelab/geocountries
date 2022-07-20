@@ -1,4 +1,10 @@
-# geocodes
+
+![logo](img/geocountries.svg)
+
+![npm](https://img.shields.io/npm/v/geocountries)
+![jsdeliver](https://img.shields.io/jsdelivr/npm/hw/geocountries)
+![license](https://img.shields.io/badge/license-MIT-success)
+![code size](https://img.shields.io/github/languages/code-size/neocarto/geocountries)
 
 *A tool to get ISO codes and geometries from country names*
 

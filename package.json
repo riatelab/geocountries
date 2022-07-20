@@ -2,7 +2,7 @@
   "name": "geocountries",
   "version": "1.1.5",
   "description": "A tool to get ISO codes and geometries from country names",
-  "main": "dist/index.js",
+  "main": "dist/index.min.js",
   "module": "src/index.js",
   "jsdelivr": "dist/index.min.js",
   "unpkg": "dist/index.min.js",
