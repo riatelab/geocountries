@@ -13,13 +13,13 @@
 #### <ins>In browser</ins>
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/geocountries@1.2" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/geocountries@2" charset="utf-8"></script>
 ```
 
 #### <ins>In Observable</ins>
 
 ~~~js
-geocountries = require("geocountries@1.2")
+geocountries = require("geocountries@2")
 ~~~
 
 ## Documentation
@@ -42,57 +42,45 @@ returns an object
 {name: "United States of America", iso3: "USA", score: 1}
 ~~~
 
-#### <ins>iso3</ins>
-
-To get ISO3 codes from a json data set.
-
-~~~js
-codes = geocountries.iso3({
-  json: fao,
-  name: "Area",
-  threshold: 0.7
-})
-~~~
-
-returns a Map
-
-~~~js
-{
-  "Afghanistan" => Object {name: "Afghanistan", iso3: "AFG", score: 1}
-  "Albania" => Object {name: "Albania", iso3: "ALB", score: 1}
-  "Algeria" => Object {name: "Algeria", iso3: "DZA", score: 1}
-}
-~~~
-
 #### <ins>view</ins>
 
 To visualize the matching of codes and names.
 
 ~~~js
-geocountries.view(codes)
+geocountries.view({
+  json: mydata, // a geojson
+  name: "name", // filed with country names
+  threshold: 0.9, // level of similarity
+})
 ~~~
 
 returns a svg chart
 
-![](./img/geocountries.png)
+![](./img/view.png)
 
 #### <ins>add</ins>
-
-To add the codes to the initial dataset
-
-~~~js
-data = geocountries.add({ data: mydata, codes: codes, name: "Area" })
-~~~
-
-#### <ins>addiso3</ins>
 
 If you know your dataset well and you don't need to investigate it, you can skip all the previous steps and add directly the iso3 codes.
 
 ~~~js
-geocountries.addiso3({
-  data: mydata,
-  name: "Area",
-  treashold: 0.9,
+geocountries.add({
+  json: mydata, // a geojson
+  name: "name",  // filed with country names
+  threshold: 0.9, // level of similarity
+})
+~~~
+
+returns a new json with ISO3 codes and scores
+
+#### <ins>Patches</ins>
+
+Note tha you can add a patch to add or remove codes.
+
+~~~js
+geocountries.add({
+  json: mydata, // a geojson
+  name: "name",  // filed with country names
+  threshold: 0.9, // level of similarity
   patch: [
     { name: "French Polynesia", iso3: "PYF" },
     { name: "Niue", iso3: "NIU" },
@@ -102,4 +90,12 @@ geocountries.addiso3({
     { name: "South America", iso3: undefined }
   ]
 })
+~~~
+
+#### <ins>Duplicate</ins>
+
+A simple function to get duplicate codes 
+
+~~~js
+geocountries.duplicate({ json: data, field: "name" })
 ~~~
