@@ -13,13 +13,13 @@
 #### <ins>In browser</ins>
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/geocountries" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/geocountries@1.2" charset="utf-8"></script>
 ```
 
 #### <ins>In Observable</ins>
 
 ~~~js
-geocountries = require("geocountries")
+geocountries = require("geocountries@1.2")
 ~~~
 
 ## Documentation
