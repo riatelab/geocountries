@@ -1,11 +1,13 @@
 import { similarity } from "./levenshtein.js";
 import { csv } from "d3-fetch";
-import { codes } from "./codes.js";
 
-const data = codes();
+export async function getcode(str, threshold = 0.9) {
+  let data = await csv(
+    "https://raw.githubusercontent.com/neocarto/geocountries/main/data/countries.csv"
+  );
 
-export function getcode(str, threshold = 0.9) {
   let result = [];
+
   data.forEach((e) => {
     for (let i = 1; i < Object.keys(e).length; i++) {
       let sim = similarity(str, Object.values(e)[i]);
